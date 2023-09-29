@@ -1,20 +1,39 @@
-import requests
+# Библиотеки
+from os import mkdir, path, listdir
 
-# Блок для обработки запроса! 
-web_sites = [
-    'https://demovet.obt-vlg.org/auth/users/login',
-    'http://172.25.3.11/auth/users/login',
-    'https://demovet2.it-albion.ru/auth/users/login',
-    'https://vettest.obt-vlg.ru/',
-]
+#Модули
+from config import project_folder, log_folder_name
 
-for site in web_sites:
-    try:
-        response = requests.get(site)
-        response.raise_for_status()  # Проверяем успешность запроса
+class Log:
+    def __init__(self, folder_project:str, log_folder_name:str):
+        """Конструктор"""
+        self.folder = folder_project
+        self.log_folder = log_folder_name
+        pass
 
-        # Если запрос успешен, выводим статусный код
-        print(f'Обратился к хосту {site}: Получил ответ {response.status_code}')
-    except requests.exceptions.RequestException as e:
-        # Обработка ошибки, когда невозможно достучаться до сайта
-        print(f'ВНИМАНИЕ!!!!!!!{site}: Ошибка - {e}!!!!!!!!!!!!!')
+    def create_path_folder(self, users:None):
+        """Возвращает путь до конечной папки"""
+        pass
+        
+
+    def create_folder(self):
+        """Создает подпапку с именем log_folder_name"""
+        log_folder_path = path.join(self.folder, self.log_folder)
+        if path.exists(log_folder_path):
+            print(f'Папка "{self.log_folder}" уже существует.')
+        else:
+            mkdir(log_folder_path)
+            print(f'Создана папка "{self.log_folder}" для логов.')
+
+    def create_file(self):
+        """Создает файл с текущей датой, если его нет"""
+        pass
+
+    def log_add(self):
+        """Добавляет запись в лог-файл с именем текущей даты"""
+
+#Путь: Новый пользователь (создать папку с номером его id)! При добвалении сайта, создать файл с логами с текущей датой)
+
+#Объявляем экземпляры:
+log_files = Log(project_folder, log_folder_name)
+log_files.create_folder()
